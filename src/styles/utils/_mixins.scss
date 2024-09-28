@@ -1,0 +1,67 @@
+@mixin xs {
+    @media (max-width: #{$screen-sm-min}) {
+        @content;
+    }
+ }
+
+@mixin sm {
+    @media (min-width: #{$screen-sm-min}) {
+        @content;
+    }
+ }
+ 
+ @mixin md {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+ }
+ 
+ @mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+ }
+ 
+ @mixin xl {
+    @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
+ }
+
+ @mixin small-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+ }
+
+ @mixin large-text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+ }
+
+ @mixin focus-border-shadow {
+    border-color: $border-dark;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $box-shadow-lilac;
+ }
+
+ @mixin default-border {
+    border: 1px solid $border-light;
+    border-radius: 8px;
+ }
+
+ @mixin border-line($property) {
+    #{$property}: 1px solid $border-dark;
+ }
+
+ @mixin content-div-styling {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    gap: 8px;
+    p, a {
+        margin: 0 auto;
+    }
+ }

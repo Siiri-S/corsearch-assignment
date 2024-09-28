@@ -1,34 +1,43 @@
-.table_header {
+.table_controller {
   max-width: 600px;
-  height: auto;
   border-radius: 5px;
   margin: 30px auto;
   background-color: $background;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 8px;
-  width: 100%;
+  width: 95%;
+  gap: 8px;
+  @include sm {
+    flex-direction: row;
+}
+  
   p {
     margin: auto 0;
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    color: white;
   }
 
   .option_container {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    flex-flow: row wrap;
+    flex-direction: column;
+    @include sm {
+      flex-direction: row;
+  }
     padding: 0 1rem;
     margin: auto 0;
     gap: 8px;
   }
+
   .sorter_options {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    flex-flow: row wrap;
     gap: 1rem;
+    flex-direction: row;
+  
   }
 }

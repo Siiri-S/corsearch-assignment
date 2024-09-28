@@ -11,16 +11,16 @@ const UserCard = ({ user }: Props) => (
         <p>{user.name}</p>
       </div>
     </div>
-    <div className="columns">
-      <div className="column_right">
-        <div className="column_content">
+    <div className="content-divs">
+      <div className="user-info">
+  
           <p>{user.email}</p>
           <p>{user.phone}</p>
           <a href={user.website}>{user.website}</a>
         </div>
-      </div>
-      <div className="column_left">
-        <div className="column_content">
+  
+      <div className="user-address">
+
           <p>
             {user.address.street} {user.address.suite}
           </p>
@@ -28,7 +28,7 @@ const UserCard = ({ user }: Props) => (
             {user.address.city} {user.address.zipcode}
           </p>
         </div>
-      </div>
+     
     </div>
   </div>
 );

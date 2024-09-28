@@ -1,19 +1,13 @@
 .button {
   padding: 5px 12px;
   height: 40px;
-
-  color: white;
   background-color: $default;
-
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-
-  border-radius: 8px;
+  color: white;
+  @include small-text;
+  @include default-border;
   border-style: none;
-  box-sizing: border-box;
-  outline: 0;
   text-align: center;
+  width: 100px;
 }
 
 .button:hover,

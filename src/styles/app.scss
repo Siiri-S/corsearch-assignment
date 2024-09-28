@@ -1,7 +1,9 @@
-@import './variables';
+@import './utils/variables';
+@import './utils/mixins';
 @import './elements';
 @import './components/user-card';
-@import './components/table-header';
+@import './components/table-controller';
 @import './components/button';
 @import './components/input';
 @import './components/select';
+

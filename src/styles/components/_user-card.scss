@@ -1,47 +1,50 @@
 .user_card {
   max-width: 600px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $border-dark;
   border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 3px 3px 6px #a19d9d4d;
+  box-shadow: 3px 3px 6px $box-shadow-grey;
   background-color: white;
-  margin: 30px auto;
+  margin: 2rem auto;
+  padding: 0.5rem;
+
   p,
   a {
-    padding: 8px;
     margin: 0;
   }
 
   .user_card_title {
     display: flex;
-    padding: 10px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    margin: 1rem;
+    padding: 1rem;
+    @include border-line(border-bottom);
+    width: 90%;
+    margin: 0 auto;
     p {
       margin: auto;
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 20px;
+
     }
   }
-  .columns {
+  
+  .content-divs {
     display: flex;
-    flex-direction: row;
-    .column_right {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      width: 100%;
-      border-right: 1px solid rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    @include sm {
+      flex-direction: row;
+  }
+    .user-info{
+      @include content-div-styling;
+      @include border-line(border-right);
+      margin: 0 auto;
+      @include xs{
+        @include border-line(border-bottom);
+        border-right: none;
+        width: 80%;
+      }
+    
+      
     }
-    .column_left {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      width: 100%;
+    .user-address {
+      @include content-div-styling;
     }
   }
-  .column_content {
-    margin: 0 auto;
-  }
+
 }
