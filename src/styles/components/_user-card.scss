@@ -1,0 +1,47 @@
+.user_card {
+  max-width: 600px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 3px 3px 6px #a19d9d4d;
+  background-color: white;
+  margin: 30px auto;
+  p,
+  a {
+    padding: 8px;
+    margin: 0;
+  }
+
+  .user_card_title {
+    display: flex;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin: 1rem;
+    p {
+      margin: auto;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+  .columns {
+    display: flex;
+    flex-direction: row;
+    .column_right {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+      border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+    .column_left {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+  }
+  .column_content {
+    margin: 0 auto;
+  }
+}

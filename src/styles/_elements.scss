@@ -1,0 +1,13 @@
+html {
+  body {
+    font-family: $font;
+    color: $primary;
+    background-color: $pageBackground;
+  }
+  a {
+    color: $default;
+  }
+  a:focus {
+    color: $focus;
+  }
+}
