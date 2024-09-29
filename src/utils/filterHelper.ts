@@ -6,13 +6,13 @@ export const filterHelper = (
   fields: string[]
 ) => {
   let containsString: boolean = false;
-  for (let i = 0; i < fields.length; i++) {
-    if (
-      user[fields[i] as keyof Omit<User, 'id' | 'address' | 'company'>]
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
-    ) {
-      containsString = true;
+  for (const field of fields) {
+    containsString = user[
+      field as keyof Omit<User, 'id' | 'address' | 'company'>
+    ]
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    if (containsString) {
       break;
     }
   }

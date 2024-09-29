@@ -3,7 +3,7 @@ import { User, SortType } from '../types';
 import '../styles/app.scss';
 import getAll from '../services/users';
 import { filterHelper } from '../utils/filterHelper';
-import {sortAsc, sortDesc} from '../utils/sorterHelper';
+import { sorterHelper } from '../utils/sorterHelper';
 
 interface Props {
   sendUserData: (data: User[]) => void;
@@ -11,87 +11,87 @@ interface Props {
 
 const TableController = ({ sendUserData }: Props) => {
   const [apiUsers, setUsers] = useState<User[]>([]);
-  const [searchItem, setSearchItem] = useState('');
+  const [filterString, setFilterString] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
-  const [sortType, setSortType] = useState<SortType>('asc');
+  const [sortDirection, setSortDirection] = useState<SortType>('asc');
   const [sortField, setSortField] = useState<string>('name');
 
   useEffect(() => {
     const fetchUserList = async () => {
       const users = await getAll();
       setUsers(users);
-      setFilteredUsers(users);
-      sendUserData(users);
+      const usersCopy = [...users];
+      setFilteredUsers(usersCopy);
+      sendUserData(usersCopy);
     };
     void fetchUserList();
-  }, [sendUserData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-    setSearchItem(searchTerm);
+  // send user data if filteredUsers updates
+  useEffect(() => {
+    sendUserData(filteredUsers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredUsers]);
 
-    const filteredItems = apiUsers.filter((user) =>
-      filterHelper(user, searchTerm, ['name', 'email', 'phone', 'website'])
+  // handle sorting changes
+  useEffect(() => {
+    const sortedUsers = sorterHelper(
+      [...filteredUsers],
+      sortField,
+      sortDirection === 'asc'
     );
+    setFilteredUsers(sortedUsers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortDirection, sortField]);
 
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFilterString = e.target.value;
+    const filteredItems = [...apiUsers].filter((user) =>
+      filterHelper(user, newFilterString, ['name', 'email', 'phone', 'website'])
+    );
     setFilteredUsers(filteredItems);
-    sendUserData(filteredItems);
+    setFilterString(newFilterString);
   };
 
   const handleSortFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setSortField(e.target.value);
-    const sortedUsers =
-      sortType === 'asc'
-        ? sortAsc(filteredUsers, e.target.value)
-        : sortDesc(filteredUsers, e.target.value);
-
-    setFilteredUsers(sortedUsers);
-    sendUserData(sortedUsers);
   };
 
-  const handleSortTypeChange = () => {
-    let sortedUsers = []
-    if (sortType === 'desc') {
-      setSortType('asc');
-      sortedUsers = sortAsc(filteredUsers, sortField);
-
-    } else {
-      setSortType('desc');
-      sortedUsers = sortDesc(filteredUsers, sortField);
-      
-    }
-    setFilteredUsers(sortedUsers);
-    sendUserData(sortedUsers);
+  const handleSortDirectionChange = () => {
+    setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc');
   };
-    return ( <div className="table_controller">
-    <div className="option_container">
-      <p>Search:</p>
-      <input
-        type="text"
-        value={searchItem}
-        onChange={handleInputChange}
-        placeholder="Type to search"
-        className="search"
-      />
-    </div>
-    <div className="option_container">
-      <p>Sort by:</p>
-      <div className="sorter_options">
-        <select
-          className="select"
-          name="selectedSort"
-          onChange={handleSortFieldChange}
-        >
-          <option value="name">Name</option>
-          <option value="email">Email</option>
-        </select>
-        <button className="button" onClick={handleSortTypeChange}>
-          {sortType === 'asc' ? 'Ascending' : 'Descending'}
-        </button>
+
+  return (
+    <div className="table_controller">
+      <div className="option_container">
+        <p>Search:</p>
+        <input
+          type="text"
+          value={filterString}
+          onChange={handleFilterChange}
+          placeholder="Type to search"
+          className="search"
+        />
+      </div>
+      <div className="option_container">
+        <p>Sort by:</p>
+        <div className="sorter_options">
+          <select
+            className="select"
+            name="selectedSort"
+            onChange={handleSortFieldChange}
+          >
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+          </select>
+          <button className="button" onClick={handleSortDirectionChange}>
+            {sortDirection === 'asc' ? 'Ascending' : 'Descending'}
+          </button>
+        </div>
       </div>
     </div>
-  </div>)
-}
+  );
+};
 
 export default TableController;

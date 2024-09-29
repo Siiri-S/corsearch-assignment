@@ -6,12 +6,10 @@
   @include small-text;
   @include default-border;
   border-right: 8px solid transparent;
-
 }
 
 .select:focus {
   background-color: white;
   @include focus-border-shadow;
   border-right: 8px solid transparent;
-
 }

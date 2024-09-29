@@ -20,31 +20,28 @@
     margin: 0 auto;
     p {
       margin: auto;
-
+      @include large-text;
     }
   }
-  
+
   .content-divs {
     display: flex;
     flex-direction: column;
     @include sm {
       flex-direction: row;
-  }
-    .user-info{
+    }
+    .user-info {
       @include content-div-styling;
       @include border-line(border-right);
       margin: 0 auto;
-      @include xs{
+      @include xs {
         @include border-line(border-bottom);
         border-right: none;
         width: 80%;
       }
-    
-      
     }
     .user-address {
       @include content-div-styling;
     }
   }
-
 }

@@ -5,9 +5,8 @@
   background-color: white;
   @include small-text;
   @include default-border;
-
 }
 
 .search:focus {
-  @include focus-border-shadow
+  @include focus-border-shadow;
 }
